@@ -49,14 +49,16 @@ The grader works in three phases:
 
 ## Installation
 
-Copy the `grader/` folder into your Claude Code skills directory:
+Clone the repo and copy (or symlink) the `.claude/` folder into your workspace:
 
 ```bash
+git clone https://github.com/Ovich/heigvd-lab-grader
+
 # Project-scoped (one course workspace)
-cp -r grader/ <workspace>/.claude/skills/
+cp -r heigvd-lab-grader/.claude/ <workspace>/
 
 # User-scoped (available in all projects)
-cp -r grader/ ~/.claude/skills/
+cp -r heigvd-lab-grader/.claude/skills/grader ~/.claude/skills/
 ```
 
 Then invoke from Claude Code:
