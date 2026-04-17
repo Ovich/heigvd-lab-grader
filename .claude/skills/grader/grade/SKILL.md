@@ -157,6 +157,71 @@ Fill in the Score Decisions table:
 
 ---
 
+## Step 3b — Hidden test coverage (if enabled)
+
+Skip this step if the `## Grading Criteria` section in MIND.md does not
+contain `Hidden test coverage: enabled`.
+
+### 3b-1 — Identify coverage gaps
+
+Using the student's diff (from Step 3) and the existing test results
+(from Step 2), identify what is implemented but not covered by the
+visible test suite:
+- Functions or branches that exist in the student's code but are never
+  called by the starter tests.
+- Edge cases mentioned in the lab spec or grading procedure that have
+  no corresponding test.
+- Interactions between components that the visible tests exercise in
+  isolation but not together.
+
+### 3b-2 — Propose test scenarios
+
+Present a numbered list of candidate scenarios to the professor. For each:
+
+```
+[1] <Scenario name>
+    Criterion: <which existing criterion this validates>
+    What it tests: <one sentence — the behaviour or edge case>
+    Why it matters: <what student code might get wrong here>
+
+[2] ...
+```
+
+Ask the professor:
+> Which of these would you like me to generate and run?
+> (Answer with numbers, "all", or "none")
+
+### 3b-3 — Generate and run selected tests
+
+For each selected scenario:
+1. Generate a test in the same framework as the existing test suite
+   (same file format, same assertion style).
+2. Save the generated test file to
+   `labs/<lab-slug>/submissions/<group-slug>/hidden-tests/`.
+3. Run it:
+   ```bash
+   cd labs/<lab-slug>/submissions/<group-slug>
+   <test command> hidden-tests/<test-file> 2>&1 | tee hidden-test-evidence.log
+   ```
+4. Record pass / fail.
+
+### 3b-4 — Map failures to deductions
+
+For each failing hidden test:
+- Identify which existing criterion it targets.
+- Propose a deduction amount (consistent with similar deductions in the
+  Penalties table).
+- Present to the professor for confirmation before applying.
+
+Once confirmed, apply as a deduction on the relevant criterion in the
+Score Decisions table of `grading-analysis.md`. Add a finding line:
+`> ❌ Hidden test failed: <scenario name> — <what went wrong>`
+
+If the failure reveals a recurring pattern not yet in the Penalties table,
+follow the Step 4b flow to register it and apply it retroactively.
+
+---
+
 ## Step 4 — Visual run
 
 ### Pre-run summary

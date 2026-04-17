@@ -127,9 +127,19 @@ Present the available plugins and ask which to include:
 Standard criteria plugins available:
 
   [A] Automated tests
-      Scores based on a test suite included in the repo.
-      Suggested: N pts (auto-detected from repo — adjust as needed)
-      Include? If yes: how many points total?
+      Visible tests shipped with the starter kit — students know them.
+      Scoring: 1 pt per passing test (proposed; professor can adjust).
+      These are baseline "free" points for students who do the work.
+
+      Additionally: do you want hidden test coverage per group?
+      If yes, grader/grade will — for each group — analyse their
+      implementation, propose additional test scenarios targeting edge
+      cases or untested features, let you pick which to generate and run,
+      and map any failures back to deductions on existing criteria.
+      This requires an extra interactive step per group during grading.
+
+      Include visible tests? If yes: confirm or adjust the 1 pt/test weight.
+      Enable hidden test coverage? (yes / no)
 
   [B] Teamwork (git collaboration)
       Evaluates how the team collaborated using git. Checks:
@@ -146,7 +156,12 @@ Which plugins do you want to include, and with how many points each?
 Notes:
 - **Automated tests** are proposed only if a test suite is detected in the
   sampled submissions (e.g. `package.json` with a test script, `Makefile`
-  with a test target). Do not propose if no test suite is found.
+  with a test target). Do not propose if no test suite is found. Count the
+  tests in the starter kit to anchor the 1 pt/test proposal.
+- If the professor enables hidden test coverage, record it in the
+  `## Grading Criteria` section of MIND.md as a note under the automated
+  tests criterion:
+  `> Hidden test coverage: enabled — grader/grade will generate per-group tests`
 - **Teamwork** is always proposed for group labs. For individual labs, skip
   it unless the professor brings it up.
 - To determine whether the lab is individual or group, check the number of
