@@ -162,49 +162,63 @@ Fill in the Score Decisions table:
 Skip this step if the `## Grading Criteria` section in MIND.md does not
 contain `Hidden test coverage: enabled`.
 
-### Hidden test file convention
+### Hidden test convention
 
-Hidden tests are stored in `labs/<lab-slug>/submissions/<group-slug>/hidden-tests/`
-and named using the pattern:
+**Before writing any hidden test**, locate the existing test suite by
+inspecting the submission: check `package.json` (test script, mocha/jest
+config), `.mocharc*`, `jest.config*`, or any config file that reveals
+where tests live and how they are run. Read at least one existing test
+file to understand the exact import paths, fixture setup, helper usage,
+and assertion style. Mirror that pattern exactly — do not invent a new
+structure.
 
+Hidden tests are written **into the same directory and follow the same
+conventions as the existing starter tests**. Do not create a separate
+folder.
+
+Each hidden test's `describe` or `it` label must be prefixed with
+`[HIDDEN]` so they can be identified unambiguously:
+
+```js
+// existing starter test (example — actual style may differ)
+describe("Game interaction", () => { ... });
+
+// hidden test — same directory, same imports, same style
+describe("[HIDDEN] Game interaction — edge cases", () => {
+  it("[HIDDEN] slam on already-placed shape does nothing", () => { ... });
+});
 ```
-hidden-<criterion-slug>-<scenario-slug>.<ext>
-```
-
-Examples: `hidden-input-listener-mousedown-edge.test.js`, `hidden-game-slam-double.test.js`
-
-This naming makes them unambiguous and prevents confusion with starter tests.
 
 ### 3b-check — Check for existing hidden tests
 
-Before anything else, check whether `hidden-tests/` already exists and
-contains files matching the `hidden-*` convention:
+Before anything else, locate the test directory from the submission config,
+then scan it for any test labelled `[HIDDEN]`:
 
 ```bash
-ls labs/<lab-slug>/submissions/<group-slug>/hidden-tests/hidden-* 2>/dev/null
+grep -rl "\[HIDDEN\]" labs/<lab-slug>/submissions/<group-slug>/<test-dir>/ 2>/dev/null
 ```
 
-**Files found:** present a summary to the professor:
+**Matches found:** present a summary to the professor:
 
 ```
 Hidden tests already exist for <group-slug>:
-  hidden-input-listener-mousedown-edge.test.js   ✅ passed / ❌ failed
-  hidden-game-slam-double.test.js                ✅ passed / ❌ failed
+  test/game.test.js          [HIDDEN] Game interaction — edge cases (✅ passed / ❌ failed)
+  test/inputListener.test.js [HIDDEN] mousedown vs click (❌ failed)
   ...
 
 What would you like to do?
-  1. Re-run existing tests (no changes)
-  2. Add new scenarios
-  3. Remove or replace a specific test
-  4. Regenerate all from scratch
+  1. Re-run existing hidden tests (no changes)
+  2. Add new hidden scenarios
+  3. Remove or replace a specific hidden test
+  4. Regenerate all hidden tests from scratch
 ```
 
 Handle the professor's choice and skip to the relevant sub-step.
 Re-running goes directly to 3b-3. Adding goes to 3b-1 (gap analysis)
-then 3b-2 (new scenarios only). Regenerating clears the folder and
-runs the full flow from 3b-0.
+then 3b-2 (new scenarios only). Regenerating removes all `[HIDDEN]`
+blocks and runs the full flow from 3b-0.
 
-**No files found:** proceed to 3b-0 (full procedure).
+**No matches found:** proceed to 3b-0 (full procedure).
 
 ### 3b-0 — Detect and verify tooling
 
