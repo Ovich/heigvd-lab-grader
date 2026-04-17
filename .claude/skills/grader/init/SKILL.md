@@ -285,6 +285,11 @@ in a state that does not reflect actual progress.
 
 ---
 
+## Grading Procedure
+<!-- filled by grader/procedure after criteria are confirmed -->
+
+---
+
 ## Solution Diff
 <!-- filled by Step 5 if solution ref provided -->
 
@@ -411,98 +416,49 @@ Do not proceed to Step 5 until `lab-spec.md` exists.
 
 ## Step 5 — Define grading criteria
 
-### 5a — Gather criteria from available sources
+Ask the professor:
+> Do you have an existing criteria document or rubric to load, or should I
+> generate criteria from scratch based on the lab materials?
 
-Before involving the professor, search for grading criteria in what is
-already available. Build an initial proposal from any of the following:
+### If existing criteria provided
 
-1. **Lab spec** (`lab-spec.md`) — look for grading sections, scoring tables,
-   point breakdowns, or evaluation rubrics.
-2. **Course material** — check for a general grading policy or per-lab
-   criteria page.
-3. **Solution diff** — infer which files and functions students were asked to
-   implement; use these to propose criteria names and relative weights.
-4. **Criteria file provided by professor** — if one was given in Step 1,
-   read it and extract the full breakdown.
-
-From whatever is found, draft an initial criteria proposal:
-- Criterion name and max points for each.
-- Source: `automated` (test suite) or `manual` (code review / visual check).
-- Grade formula.
-- Late penalty rule: look for it in the lab spec or course material. If not
-  stated, the default to propose is `−0.1 per started late day` — but always
-  ask the professor to confirm explicitly in Step 5b regardless of the source.
-- Any special rules (bonus, caps, minimum grade).
-
-### 5b — Present and confirm with professor
-
-Present the proposal to the professor before writing anything to MIND.md.
-Split the confirmation into two explicit blocks: criteria and late penalty.
-
-**Block 1 — Criteria and grade formula:**
-```
-Proposed grading criteria for <lab-name>:
-
-  Criterion              Max   Source
-  ─────────────────────────────────────
-  CriterionA              8    automated (test suite)
-  CriterionB              4    manual
-  ...
-  Total                  /25
-
-  Grade formula: round((points / 25 × 5) + 1 − penalties, 0.1)
-
-  Source: inferred from lab-spec.md + solution diff
-  Missing: [anything not found — e.g. "no point breakdown in lab spec"]
-
-Does this look right? Any changes before I proceed?
-```
-
-**Block 2 — Late penalty formula (always ask explicitly, even if inferred):**
-```
-Late penalty proposal:
-
-  Default: −0.1 per started late day
-  (A "started late day" is any fraction of a 24 h period past the deadline —
-   e.g. 1 h late = 1 day = −0.1; 25 h late = 2 days = −0.2)
-
-  Source: <"inferred from lab-spec.md" / "course default — not stated in spec">
-
-  Is this formula correct?
-  If different, please provide:
-    • Deduction per day (e.g. −0.1, −0.5 …)
-    • How partial days are counted (started day / full day / hours)
-    • Any grace period or extension policy to apply globally
-```
-
-Wait for explicit confirmation on both blocks before writing to MIND.md.
-
-If the professor requests significant changes to the criteria or no criteria
-could be inferred at all, invoke `grader/init/criteria` to work through the
-rubric interactively. Return here when it completes.
-
-### 5c — Write to MIND.md
-
-Once confirmed, write the **Grading Criteria** section in MIND.md and add
-the criterion columns to the Scoring Table header.
-
-### If solution reference provided
-
-Generate the diff between template and solution:
+1. Ask the professor to share or point to the criteria document.
+2. Extract the criteria table, max points, source (automated / manual), and
+   grade formula.
+3. Confirm the late penalty formula explicitly (same two-block format as
+   `grader/criteria` Step 2).
+4. Write the confirmed criteria to `## Grading Criteria` in MIND.md.
+5. Update the Scoring Table header with criterion columns.
+6. Tick `Grading criteria defined`.
+7. If a solution reference is set in the MIND.md header, generate the
+   solution diff now:
 
 ```bash
 cd _global/lab-solutions/<lab-slug>
 git diff <template-branch>..<solution-branch> -- <relevant dirs>
 ```
 
-Limit the diff to the directories students were expected to modify (infer
-from the lab spec and criteria — typically `src/`, `test/`, or equivalent
-for the language used in the lab).
+Write the result to `## Solution Diff` in MIND.md. Tick `Solution diff generated`.
 
-Write the result into the **Solution Diff** section of MIND.md. This
-diff is used in Step 6 to infer what students were expected to implement.
+8. Invoke `grader/procedure` to generate the grading procedure.
 
-Tick `Grading criteria defined` and (if applicable) `Solution diff generated`.
+### If generating from scratch
+
+If a solution reference is set in the MIND.md header, generate the solution
+diff now so it is ready for `grader/criteria` to use:
+
+```bash
+cd _global/lab-solutions/<lab-slug>
+git diff <template-branch>..<solution-branch> -- <relevant dirs>
+```
+
+Write the result to `## Solution Diff` in MIND.md. Tick `Solution diff generated`.
+
+Then invoke `grader/criteria`. It will analyse submissions, the solution
+diff, lab spec, and course material, propose criteria, write them to MIND.md,
+and invoke `grader/procedure` when done.
+
+Tick `Grading criteria defined` once `grader/criteria` completes.
 
 ---
 
