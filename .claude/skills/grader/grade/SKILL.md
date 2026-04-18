@@ -485,9 +485,9 @@ Once grading-analysis.md is complete and scores are final:
 ```
 ✅ <group-slug> — graded
 
-  Tests:     N / Max (automated)
-  Manual:    N / Max
-  Live:      N / Max
+  Tests:     N / Max (automated)   ← N/A if no automated criteria
+  Manual:    N / Max               ← N/A if no manual criteria
+  Live:      N / Max               ← N/A if no live criteria
   Penalty:   −X.X (N days late) / 0
   Total:     N / Max
   Grade:     X.X
