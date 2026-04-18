@@ -38,6 +38,25 @@ Check if `## Grading Procedure` already exists and is populated:
   > A grading procedure already exists. Do you want to:
   > 1. Regenerate it fully (replaces everything)
   > 2. Update only specific criteria subsections
+  > 3. Add a new penalty to an existing criterion
+  > 4. Retire or replace an existing penalty
+
+### Option 3 — Add a new penalty
+
+Ask for: which criterion, description, deduction amount, and ID prefix.
+Assign the next available index for that prefix (e.g. if `IMPL-01` exists,
+use `IMPL-02`). Add the row to the criterion's "Common deductions" table.
+Confirm with the professor, then write to MIND.md. Status remains READY —
+no re-approval needed for a penalty addition.
+
+### Option 4 — Retire or replace a penalty
+
+Ask which penalty ID to retire and whether it is being replaced.
+- **Disable:** remove the row from the procedure. Add to `## Penalty Archive`:
+  `| <ID> | <description> | <deduction> | disabled | — |`
+- **Replace:** remove the old row, add it to archive with
+  `replaced-by: <new-ID>`, then add the new penalty row with the fresh ID.
+Confirm with the professor before writing. Status remains READY.
 
 ---
 

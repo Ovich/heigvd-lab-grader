@@ -394,16 +394,12 @@ After completing the code analysis and visual run, review the findings:
      apply it anyway.
    - Do not update any analysis until the penalty is confirmed.
 
-   Once the penalty is confirmed (by observation or by professor), raise it
-   for procedure update:
+   Once the penalty is confirmed (by observation or by professor), surface
+   it to the professor and invoke `grader/procedure` to handle the update:
    > ⚠️ New penalty pattern found: `<description>` (proposed: −N pts)
-   > This should be added to the Grading Procedure. Please confirm the
-   > deduction amount and a short ID prefix (e.g. `IMPL`, `API`, `STRUCT`).
-   > I'll update the procedure and apply this retroactively.
+   > Invoking `grader/procedure` to add it to the procedure.
 
-   Wait for professor confirmation, then:
-   - Add the new penalty row (with assigned ID) to the relevant criterion's
-     "Common deductions" table in `## Grading Procedure` in MIND.md.
+   After `grader/procedure` completes and the new penalty has an assigned ID:
    - Immediately check all previously graded groups for the same issue
      (read their grading-analysis.md and, if needed, their code diff).
    - For each previously graded group where the same issue is present:
@@ -413,7 +409,7 @@ After completing the code analysis and visual run, review the findings:
    - Report to the professor:
 
    ```
-   ⚠️  New penalty added to procedure: <ID> — <description> (−N pts)
+   ⚠️  New penalty applied: <ID> — <description> (−N pts)
        Applied to current group: <group-slug>
        Retroactive check: <list affected previously-graded groups, or "none">
    ```
@@ -421,10 +417,7 @@ After completing the code analysis and visual run, review the findings:
    Wait for the professor to confirm or adjust before proceeding.
 
    **If the professor wants to retire or replace an existing penalty:**
-   - Remove the penalty row from the procedure.
-   - Add it to `## Penalty Archive` in MIND.md:
-     `| <ID> | <description> | <deduction> | disabled / replaced-by: <new-ID> | <new-ID or —> |`
-   - If replacing: add the new penalty row to the procedure with a fresh ID.
+   invoke `grader/procedure` — it owns procedure and archive management.
 
 ---
 

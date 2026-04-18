@@ -271,7 +271,6 @@ in a state that does not reflect actual progress.
 - [ ] Solution diff generated
 - [ ] Scoring table initialised
 - [ ] Grading analysis template generated
-- [ ] Automated tests run on all submissions
 
 ## Phase 2 · Grade
 - [ ] All groups graded (0 / ?)
@@ -523,26 +522,6 @@ Present the generated template to the professor and ask for confirmation
 before writing it to MIND.md.
 
 Tick `Grading analysis template generated`.
-
----
-
-## Step 7 — Run automated tests
-
-If the grading criteria include automated test scores:
-
-1. Detect the test toolchain from each repo (e.g. `package.json` → `npm test`,
-   `Makefile` → `make test`, `pom.xml` → `mvn test`, `mix.exs` → `mix test`).
-2. Run tests for all submissions. Prefer Docker if a `Dockerfile` is
-   present; fall back to running directly with the detected test command.
-3. Save output to `submissions/<group-slug>/test-evidence.log`.
-4. Parse pass/fail counts and fill the automated test columns in the
-   Scoring Table in MIND.md.
-5. For not-submitted repos, record 0.
-
-If Docker is required but not running:
-> Docker Desktop is not running — please start it and let me know.
-
-Tick `Automated tests run on all submissions`.
 
 ---
 
