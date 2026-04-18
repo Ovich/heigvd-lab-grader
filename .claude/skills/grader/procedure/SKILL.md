@@ -41,6 +41,13 @@ Check if `## Grading Procedure` already exists and is populated:
   > 3. Add a new penalty to an existing criterion
   > 4. Retire or replace an existing penalty
 
+### Option 2 — Update specific subsections
+
+Ask which criteria to update (by name). Gather context (Step 1) scoped
+to those criteria only, regenerate their subsections (Step 2), and
+overwrite just those blocks in MIND.md. All other subsections remain
+unchanged. Status stays READY — no re-approval needed.
+
 ### Option 3 — Add a new penalty
 
 Ask for: which criterion, description, deduction amount, and ID prefix.
