@@ -45,7 +45,7 @@ When generating criteria, the following standard plugins can be opted into:
 |--------|---------------|------|
 | **[A] Automated tests — visible** | Starter-kit tests students know about. 1 pt/test (adjustable). | Fast — seconds per group |
 | **[B] Automated tests — hidden** | Edge-case tests generated per group from their implementation, mapped to existing criteria as deductions. Tooling detected and proposed per group. | 1–3 min/group, significant tokens |
-| **Teamwork** | Git collaboration: author diversity, commit time spread, use of pull requests. Proposed for group labs. | Manual check during grading |
+| **Git & workflow practices** | Commit history quality, work spread over time, no last-minute dumps. For group labs: adds contribution balance, PR usage, DevOps practices. Depth brainstormed with professor. | Manual check during grading |
 
 ---
 

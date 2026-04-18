@@ -143,12 +143,10 @@ Standard criteria opt-ins available:
       For a typical lab with 14 groups: ~20–40 min of extra grading time.
       Include? (yes / no)
 
-  [B] Teamwork (git collaboration)
-      Evaluates how the team collaborated using git. Checks:
-        • Multiple distinct commit authors
-        • Commits spread over time (not all submitted in the last hours)
-        • Use of pull requests or merge commits
-      Suggested: 2–5 pts depending on lab weight
+  [C] Git & workflow practices
+      Evaluates how the student(s) used git throughout the lab.
+      The exact depth is defined with the professor (see Notes below).
+      Suggested: 2–5 pts depending on lab weight.
       Include? If yes: how many points?
 
 Which opt-ins do you want to include, and with how many points each?
@@ -167,11 +165,26 @@ Notes:
   `## Grading Criteria` section of MIND.md as a note under the automated
   tests criterion:
   `> Hidden test coverage: enabled — grader/grade will generate per-group tests`
-- **Teamwork** is always proposed for group labs. For individual labs, skip
-  it unless the professor brings it up.
-- To determine whether the lab is individual or group, check the number of
-  distinct authors across a few submissions. If most repos have only one
-  author, treat it as individual and note this when presenting the opt-in.
+- **Git & workflow practices [C]** is proposed for all labs — individual
+  and group alike. Before writing the criterion, brainstorm its depth with
+  the professor. Start by detecting whether the lab is individual or group
+  (check distinct commit authors across a few submissions), then propose
+  a depth appropriate to the context:
+
+  *Single-student baseline (always relevant):*
+  - Commit history exists and is meaningful (not a single dump)
+  - Work spread over time, not all committed in the last hours before deadline
+  - Commit messages are descriptive
+
+  *Multi-student additions (when multiple authors detected):*
+  - Balanced contribution across team members
+  - Use of branches and pull requests
+  - DevOps practices: CI, protected branches, PR reviews — include only
+    what was taught in the course
+
+  Present the proposed depth to the professor as a short checklist and
+  ask which signals to include and how to weight them. Do not finalise
+  this criterion until the professor confirms the depth.
 
 Save the professor's opt-in choices to `criteria-work.md` before proceeding.
 
@@ -206,7 +219,7 @@ Proposed grading criteria for <lab-name>:
   ──────────────────────────────────────────────────────────────────
   CriterionA              8    automated   explicit from spec
   CriterionB              4    manual      proposed — largest diff section
-  Teamwork                3    opt-in      proposed — group lab, 3 signals
+  Git & workflow          3    opt-in      proposed — confirmed depth with professor
   ...
   Total                  /25
 
