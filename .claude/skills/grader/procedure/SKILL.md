@@ -68,6 +68,35 @@ Read the following in priority order:
 2. `## Solution Diff` in MIND.md — what a correct implementation looks like
 3. `labs/<lab-slug>/criteria-work.md` — submission samples and analysis (if present)
 4. `labs/<lab-slug>/lab-spec.md` — expected behaviour, constraints, prohibited patterns
+5. `_global/course-material/` — if present, extract relevant content (see Step 1a)
+
+### Step 1a — Extract course material excerpts (optional)
+
+If `_global/course-material/` exists, scan it for content related to the
+current criteria: concept definitions, expected patterns, constraints, or
+common pitfalls that are explicitly taught in the course.
+
+For each relevant excerpt found, note:
+- The source file and section
+- Which criterion it relates to
+- The key teaching point (one or two sentences)
+
+Save all excerpts to `labs/<lab-slug>/procedure-course-refs.md`:
+
+```markdown
+# Course Material References — <lab-name>
+
+## <Criterion name>
+- **Source:** `_global/course-material/<file>#<section>`
+- **Teaching point:** <what students were taught, relevant to grading this criterion>
+
+## <Criterion name>
+...
+```
+
+If no relevant content is found in the course material, skip this file.
+Use `procedure-course-refs.md` in Step 2 to enrich "What to look for"
+and to add `📖 See:` references in the procedure where applicable.
 
 ---
 
