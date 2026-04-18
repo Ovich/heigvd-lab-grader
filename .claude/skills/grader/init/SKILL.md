@@ -309,16 +309,6 @@ in a state that does not reflect actual progress.
 
 ---
 
-## Penalty Archive
-<!-- Penalties retired during grading — disabled or replaced by newer versions. -->
-<!-- Active penalties live in the Grading Procedure with short IDs.             -->
-<!-- When a penalty is retired, move it here from the procedure.                -->
-
-| ID | Description | Deduction | Status | Replaced by |
-|----|-------------|-----------|--------|-------------|
-
----
-
 ## Scoring Table
 <!-- filled by Step 4 -->
 <!-- single source of truth — update scores here as groups are graded -->

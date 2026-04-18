@@ -59,10 +59,9 @@ no re-approval needed for a penalty addition.
 ### Option 4 — Retire or replace a penalty
 
 Ask which penalty ID to retire and whether it is being replaced.
-- **Disable:** remove the row from the procedure. Add to `## Penalty Archive`:
-  `| <ID> | <description> | <deduction> | disabled | — |`
-- **Replace:** remove the old row, add it to archive with
-  `replaced-by: <new-ID>`, then add the new penalty row with the fresh ID.
+- **Disable:** remove the row from the procedure.
+- **Replace:** remove the old row and add the new penalty row with a fresh ID.
+
 Confirm with the professor before writing. Status remains READY.
 
 ---
@@ -167,8 +166,7 @@ Guidelines per source type:
 
 **Penalty ID naming:** use a short prefix reflecting the criterion or mistake
 category, followed by a two-digit index (e.g. `IMPL-01`, `API-02`, `LATE-01`).
-IDs must be unique across the entire procedure. They are referenced in
-`## Penalty Archive` when a penalty is retired or replaced.
+IDs must be unique across the entire procedure.
 
 Infer common deductions from:
 - The solution diff (what the correct implementation does that a naive one
@@ -258,13 +256,6 @@ in MIND.md.
    - **Changes requested:** brainstorm with the professor, update the
      relevant subsection(s) in MIND.md (add, remove, or adjust penalty rows
      or "What to look for" items), then ask again. Repeat until approved.
-
-When updating penalty entries based on professor feedback:
-- Retiring a penalty: remove it from the procedure and add it to
-  `## Penalty Archive` in MIND.md with status `disabled`.
-- Replacing a penalty: remove the old row from the procedure, add it to
-  the archive with status `replaced-by: <new-ID>`, and add the new row
-  with a fresh ID.
 
 ### Step 3a — Mark as READY
 

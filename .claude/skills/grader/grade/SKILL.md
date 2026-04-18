@@ -38,7 +38,7 @@ it. Every criterion score must trace back to a procedure subsection.
 **Consistent penalties across all groups.** The Grading Procedure defines
 all active penalties with short IDs (e.g. `IMPL-01`). Apply every listed
 penalty that fits. When a new penalty pattern is discovered, raise it with
-the professor — do not modify the procedure or Penalty Archive directly.
+the professor — do not modify the procedure directly.
 
 ---
 
@@ -420,7 +420,7 @@ After completing the code analysis and visual run, review the findings:
    Wait for the professor to confirm or adjust before proceeding.
 
    **If the professor wants to retire or replace an existing penalty:**
-   invoke `grader/procedure` — it owns procedure and archive management.
+   invoke `grader/procedure` to update the procedure.
 
 ---
 
