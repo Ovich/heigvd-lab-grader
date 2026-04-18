@@ -186,18 +186,18 @@ file to understand the exact import paths, fixture setup, helper usage,
 and assertion style. Mirror that pattern exactly — do not invent a new
 structure.
 
-Hidden tests are written **into the same directory and follow the same
-conventions as the existing starter tests**. Do not create a separate
-folder.
-
 Each hidden test's `describe` or `it` label must be prefixed with
-`[HIDDEN]` so they can be identified unambiguously:
+`[HIDDEN]` — this is the only hard rule. Where to place the test file
+is a judgment call: use whatever location fits the project's structure
+(alongside starter tests, in a subfolder, or wherever the test runner
+will pick them up). Mirror the existing framework, imports, and assertion
+style exactly.
 
 ```js
 // existing starter test (example — actual style may differ)
 describe("Game interaction", () => { ... });
 
-// hidden test — same directory, same imports, same style
+// hidden test — same framework and style, [HIDDEN] prefix required
 describe("[HIDDEN] Game interaction — edge cases", () => {
   it("[HIDDEN] slam on already-placed shape does nothing", () => { ... });
 });
@@ -209,7 +209,7 @@ Before anything else, locate the test directory from the submission config,
 then scan it for any test labelled `[HIDDEN]`:
 
 ```bash
-grep -rl "\[HIDDEN\]" labs/<lab-slug>/submissions/<group-slug>/<test-dir>/ 2>/dev/null
+grep -rl "\[HIDDEN\]" labs/<lab-slug>/submissions/<group-slug>/ 2>/dev/null
 ```
 
 **Matches found:** present a summary to the professor:
@@ -294,15 +294,12 @@ Ask the professor:
 
 For each selected scenario:
 1. Generate a test in the same framework as the existing test suite
-   (same file format, same assertion style).
-2. Save the generated test file to
-   `labs/<lab-slug>/submissions/<group-slug>/hidden-tests/`.
-3. Run it:
-   ```bash
-   cd labs/<lab-slug>/submissions/<group-slug>
-   <test command> hidden-tests/<test-file> 2>&1 | tee hidden-test-evidence.log
-   ```
-4. Record pass / fail.
+   (same file format, same assertion style). Place it wherever the test
+   runner will pick it up given the project's structure — no fixed location
+   is required. All labels must include the `[HIDDEN]` prefix.
+2. Run it and capture output to `hidden-test-evidence.log` in the
+   submission folder.
+3. Record pass / fail.
 
 ### 3b-4 — Map failures to deductions
 
