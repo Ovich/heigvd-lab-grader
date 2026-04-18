@@ -326,10 +326,11 @@ follow the Step 4b flow to register it and apply it retroactively.
 
 Read `## Run Plan` in MIND.md. Check `**AI-run:**`:
 
-**`approved`** — adapt the start command to the current group (substitute
-`<group-slug>` in any paths), then start the project. Always bind to host
-port 3333 to avoid conflicts. Save console output to `project-evidence.log`
-in the submission folder.
+**`approved`** — check `**Stack:**` in the run plan:
+- **`common`** — adapt the start command to the current group (substitute `<group-slug>` in any paths) and start the project.
+- **`per-group`** — inspect the current group's repo to detect the run method (Dockerfile, package.json, Makefile, run script, etc.), applying any professor constraints noted in the run plan. Determine the start command before proceeding.
+
+Save console output to `project-evidence.log` in the submission folder.
 
 If Docker is required but not running:
 > Docker Desktop is not running — please start it, then let me know.
