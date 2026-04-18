@@ -61,7 +61,9 @@ When generating criteria, the following standard opt-ins are available:
     └── <lab-slug>/
         ├── MIND.md
         ├── lab-spec.md
-        ├── criteria-work.md         ← scratch pad used by grader/criteria
+        ├── _mem/                    ← internal skill working files (not for professor use)
+        │   ├── criteria-work.md
+        │   └── procedure-course-refs.md
         └── submissions/
             └── <group-slug>/
                 ├── grading-analysis.md

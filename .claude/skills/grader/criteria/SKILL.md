@@ -13,9 +13,9 @@ description: >
 ## Guiding Principles
 
 **Never modify this skill file.** All session-specific decisions belong in
-MIND.md or `criteria-work.md`.
+MIND.md or `_mem/criteria-work.md`.
 
-**Output goes to central MIND.md.** Use `labs/<lab-slug>/criteria-work.md`
+**Output goes to central MIND.md.** Use `labs/<lab-slug>/_mem/criteria-work.md`
 as a scratch pad for intermediate analysis only. The final confirmed criteria
 table belongs in MIND.md `## Grading Criteria`.
 
@@ -73,7 +73,7 @@ Read `## Grading Criteria` in MIND.md.
 
 ## Step 1 — Gather resources (first run)
 
-Store all intermediate analysis in `labs/<lab-slug>/criteria-work.md`.
+Store all intermediate analysis in `labs/<lab-slug>/_mem/criteria-work.md`.
 
 ### 1a — Solution diff
 
@@ -115,7 +115,7 @@ BASE=$(git -C labs/<lab-slug>/submissions/<group-slug> \
 git -C labs/<lab-slug>/submissions/<group-slug> diff $BASE HEAD
 ```
 
-Save each diff under a labelled section in `criteria-work.md`.
+Save each diff under a labelled section in `_mem/criteria-work.md`.
 
 ### 1c — Course material (optional)
 
@@ -123,7 +123,7 @@ Check whether `_global/course-material/` is present.
 
 - **Present** → search for pages related to the lab topic (match lab name,
   slug, or key terms from lab-spec.md). Extract the relevant sections and
-  append to `criteria-work.md`.
+  append to `_mem/criteria-work.md`.
 - **Absent** → inform the professor:
   > No course material was found. Adding it to `_global/course-material/`
   > would help generate more accurate criteria and grading procedures.
@@ -136,7 +136,7 @@ Re-read `labs/<lab-slug>/lab-spec.md`. Look for:
 - Lists of expected deliverables or features
 - Technical constraints or prohibited patterns
 
-Append findings to `criteria-work.md`.
+Append findings to `_mem/criteria-work.md`.
 
 ### 1e — Standard opt-ins
 
@@ -208,13 +208,13 @@ Notes:
   ask which signals to include and how to weight them. Do not finalise
   this criterion until the professor confirms the depth.
 
-Save the professor's opt-in choices to `criteria-work.md` before proceeding.
+Save the professor's opt-in choices to `_mem/criteria-work.md` before proceeding.
 
 ---
 
 ## Step 2 — Analyse and propose criteria
 
-Using everything in `criteria-work.md`, draft a full criteria proposal
+Using everything in `_mem/criteria-work.md`, draft a full criteria proposal
 combining lab-specific criteria and any selected opt-ins.
 
 **Weighting guidance:**

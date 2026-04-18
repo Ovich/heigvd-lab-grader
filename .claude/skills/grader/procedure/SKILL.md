@@ -72,7 +72,7 @@ Read the following in priority order:
 
 1. `## Grading Criteria` in MIND.md — the criteria to write procedure for
 2. `## Solution Diff` in MIND.md — what a correct implementation looks like
-3. `labs/<lab-slug>/criteria-work.md` — submission samples and analysis (if present)
+3. `labs/<lab-slug>/_mem/criteria-work.md` — submission samples and analysis (if present)
 4. `labs/<lab-slug>/lab-spec.md` — expected behaviour, constraints, prohibited patterns
 5. Course material — if `**Course material:**` in MIND.md is not `n/a`, extract relevant content (see Step 1a)
 
@@ -88,7 +88,7 @@ For each relevant excerpt found, note:
 - Which criterion it relates to
 - The key teaching point (one or two sentences)
 
-Save all excerpts to `labs/<lab-slug>/procedure-course-refs.md`:
+Save all excerpts to `labs/<lab-slug>/_mem/procedure-course-refs.md`:
 
 ```markdown
 # Course Material References — <lab-name>
@@ -102,7 +102,7 @@ Save all excerpts to `labs/<lab-slug>/procedure-course-refs.md`:
 ```
 
 If no relevant content is found in the course material, skip this file.
-Use `procedure-course-refs.md` in Step 2 to enrich "What to look for"
+Use `_mem/procedure-course-refs.md` in Step 2 to enrich "What to look for"
 and to add `📖 See:` references in the procedure where applicable.
 
 ---
@@ -171,7 +171,7 @@ IDs must be unique across the entire procedure.
 Infer common deductions from:
 - The solution diff (what the correct implementation does that a naive one
   might skip or mishandle)
-- Submission samples in `criteria-work.md` (actual mistakes seen)
+- Submission samples in `_mem/criteria-work.md` (actual mistakes seen)
 - Lab spec constraints (anything explicitly required or prohibited)
 
 If none of these are available for a criterion, propose plausible deductions
