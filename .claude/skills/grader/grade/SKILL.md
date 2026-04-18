@@ -30,11 +30,15 @@ the student's own code.
 graded. Never leave the table in a state that does not reflect actual
 progress.
 
-**Consistent penalties across all groups.** The Grading Procedure in MIND.md
-defines all active penalties with short IDs (e.g. `IMPL-01`). Apply every
-listed penalty that fits. When a new penalty pattern is discovered during
-grading, raise it with the professor for procedure update — do not modify
-the procedure or the Penalty Archive directly.
+**The Grading Procedure is the authority for every scoring decision.**
+Read it in Step 0 and derive which grading actions are required. Do not
+run tests, analyse code, or start the project unless the procedure requires
+it. Every criterion score must trace back to a procedure subsection.
+
+**Consistent penalties across all groups.** The Grading Procedure defines
+all active penalties with short IDs (e.g. `IMPL-01`). Apply every listed
+penalty that fits. When a new penalty pattern is discovered, raise it with
+the professor — do not modify the procedure or Penalty Archive directly.
 
 ---
 
@@ -43,16 +47,27 @@ the procedure or the Penalty Archive directly.
 Read `labs/<lab-slug>/MIND.md`. Extract:
 - Deadline.
 - Grading analysis template.
+- Scoring table — identify which groups have an empty Analysis column
+  (not yet graded) and which have already been graded.
 - **Grading Procedure** — check the status annotation on the first line of
   the `## Grading Procedure` section:
   - `<!-- status: READY -->` → proceed normally.
   - `<!-- status: DRAFT -->` or status missing → **stop**:
     > The grading procedure has not been approved yet (status: DRAFT).
     > Please review and approve it with `grader/procedure` before grading.
-  Load the full procedure content and note all penalty IDs and their
+
+  Load the full procedure. From it, derive the **grading plan** for this
+  session — which steps are needed based on source types present:
+
+  | If procedure contains… | Then… |
+  |------------------------|-------|
+  | Any `automated` criterion | Step 2 (run tests) is required |
+  | Any `manual` criterion | Step 3 (code analysis) is required |
+  | `Hidden test coverage: enabled` | Step 3b (hidden tests) is required |
+  | Any `live` criterion | Step 4 (visual run) is required |
+
+  Also note: grade formula, late penalty rule, all penalty IDs and
   deductions — these must be applied consistently to every group.
-- Scoring table — identify which groups have an empty Analysis column
-  (not yet graded) and which have already been graded.
 
 If Phase 1 is not fully checked off, stop and tell the professor:
 > Init is not complete. Please finish `grader/init` before grading.
@@ -72,9 +87,9 @@ proceed with the suggested one.
 
 ---
 
-## Step 2 — For each group: run automated tests
+## Step 2 — Run automated tests
 
-For each group to grade:
+**Skip this step if the grading plan has no `automated` criteria.**
 
 ### Check submission status
 
@@ -109,6 +124,9 @@ test columns in the scoring table immediately.
 
 ## Step 3 — Analyse student code
 
+**Skip the manual analysis subsection if the grading plan has no `manual`
+criteria — but always read the student's diff as context for all steps.**
+
 ### Read the student's diff
 
 Generate the diff between the starting template and the student's submission
@@ -141,17 +159,15 @@ For each file section in the template:
   add a reference: `> 📖 See: lab-spec.md § <section>`
 - **Never include solution code or expected implementations.**
 
-Fill in the Score Decisions table:
-- Automated test scores: from Step 2 results.
-- Manual scores: based on code analysis so far (visual run in Step 4 may
-  adjust these).
-- Apply the late penalty using **exactly the formula in MIND.md** (confirmed
-  by professor during init). Determine the student's last student commit date
-  with `git log` (exclude `github-classroom[bot]` commits). Count late days
-  according to the method in MIND.md (e.g. started late day = any fraction
-  of a 24 h period past the deadline counts as one full day). Show your
-  calculation explicitly in the Score Decisions table comment field.
-- Compute the final grade using the formula from MIND.md.
+Fill in the Score Decisions table, using the grading procedure as the
+authority for each criterion:
+- **Automated criteria:** scores from Step 2 test results.
+- **Manual criteria:** scores from code analysis above.
+- **Live criteria:** leave blank — filled after Step 4 professor findings.
+- **Late penalty:** apply exactly the formula from the procedure preamble.
+  Determine the student's last commit date with `git log` (exclude
+  `github-classroom[bot]` commits). Show the calculation explicitly.
+- **Final grade:** compute using the formula from the procedure preamble.
 
 ---
 
@@ -307,27 +323,9 @@ follow the Step 4b flow to register it and apply it retroactively.
 
 ## Step 4 — Visual run
 
-### Pre-run summary
-
-Before running, summarise to the professor what to expect based on the
-code analysis:
-- Which interactions should work correctly.
-- Which have known issues (wrong event type, wrong scope, etc.).
-- Any edge cases to watch for.
-
-This sets up a focused test session and helps confirm or challenge the
-preliminary scores.
-
-### Instrument the submission
-
-Add an identification log line at startup: `[<group-slug>] started`.
-This confirms which project is running when multiple submissions are tested
-in sequence. Add it at the earliest point in the entry file (server-side
-and/or client-side as appropriate for the project type).
+**Skip this step entirely if the grading plan has no `live` criteria.**
 
 ### Read the run plan
-
-If no live criteria exist in the procedure, skip Step 4 entirely.
 
 Read `## Run Plan` in MIND.md. Check `**AI-run:**`:
 
