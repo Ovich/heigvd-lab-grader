@@ -20,7 +20,7 @@ If the professor asks to remember something, write it to MIND.md, not here.
 directory.
 
 **MIND.md is the source of truth.** Read it first on every invocation —
-criteria, deadline, grading template, and scoring table all come from there.
+the grading procedure, deadline, grading template, and scoring table all come from there.
 
 **Student code only in analyses.** grading-analysis.md is published to
 students. Never reference the solution or expected implementation — only
@@ -30,29 +30,27 @@ the student's own code.
 graded. Never leave the table in a state that does not reflect actual
 progress.
 
-**Consistent penalties across all groups.** Read the Penalties table in
-MIND.md before analysing each group. Apply every listed penalty that fits.
-When a new penalty type is discovered, add it to the table immediately and
-retroactively check all already-graded groups — update their analyses and
-scores if the same issue is present.
+**Consistent penalties across all groups.** The Grading Procedure in MIND.md
+defines all active penalties with short IDs (e.g. `IMPL-01`). Apply every
+listed penalty that fits. When a new penalty pattern is discovered during
+grading, raise it with the professor for procedure update — do not modify
+the procedure or the Penalty Archive directly.
 
 ---
 
 ## Step 0 — Load context from MIND.md
 
 Read `labs/<lab-slug>/MIND.md`. Extract:
-- Grading criteria (criteria names, max points, automated vs manual).
-- Grade formula and late penalty rule.
 - Deadline.
 - Grading analysis template.
-- **Penalties table** — the running catalogue of known deductions. Note each
-  entry; they must be applied to every group where the condition is met.
-  If the section is absent (MIND.md predates this feature), add it now:
-  ```markdown
-  ## Penalties
-  | Penalty | Description | Deduction | First seen in |
-  |---------|-------------|-----------|---------------|
-  ```
+- **Grading Procedure** — check the status annotation on the first line of
+  the `## Grading Procedure` section:
+  - `<!-- status: READY -->` → proceed normally.
+  - `<!-- status: DRAFT -->` or status missing → **stop**:
+    > The grading procedure has not been approved yet (status: DRAFT).
+    > Please review and approve it with `grader/procedure` before grading.
+  Load the full procedure content and note all penalty IDs and their
+  deductions — these must be applied consistently to every group.
 - Scoring table — identify which groups have an empty Analysis column
   (not yet graded) and which have already been graded.
 
@@ -115,7 +113,7 @@ test columns in the scoring table immediately.
 
 Generate the diff between the starting template and the student's submission
 to identify what they changed. Limit the diff to the directories students
-were expected to modify (infer from the grading criteria and solution diff
+were expected to modify (infer from the grading procedure and solution diff
 in MIND.md — typically `src/`, `test/`, or equivalent for the language):
 
 ```bash
@@ -159,8 +157,8 @@ Fill in the Score Decisions table:
 
 ## Step 3b — Hidden test coverage (if enabled)
 
-Skip this step if the `## Grading Criteria` section in MIND.md does not
-contain `Hidden test coverage: enabled`.
+Skip this step if the `## Grading Procedure` preamble in MIND.md does not
+contain `**Hidden test coverage:** enabled`.
 
 ### Hidden test convention
 
@@ -294,15 +292,15 @@ For each selected scenario:
 
 For each failing hidden test:
 - Identify which existing criterion it targets.
-- Propose a deduction amount (consistent with similar deductions in the
-  Penalties table).
+- Propose a deduction amount (consistent with similar penalties in the
+  Grading Procedure).
 - Present to the professor for confirmation before applying.
 
 Once confirmed, apply as a deduction on the relevant criterion in the
 Score Decisions table of `grading-analysis.md`. Add a finding line:
 `> ❌ Hidden test failed: <scenario name> — <what went wrong>`
 
-If the failure reveals a recurring pattern not yet in the Penalties table,
+If the failure reveals a recurring pattern not yet in the Grading Procedure,
 follow the Step 4b flow to register it and apply it retroactively.
 
 ---
@@ -357,7 +355,7 @@ Save console output to `project-evidence.log` in the submission folder.
 
 ### Test the required interactions
 
-The interactions to test are defined by the grading criteria in MIND.md.
+The interactions to test are defined by the grading procedure in MIND.md.
 Test each one and note findings. At minimum, verify:
 - The project starts without errors.
 - Each required user interaction produces the expected result.
@@ -378,28 +376,34 @@ Recompute the final grade.
 
 After completing the code analysis and visual run, review the findings:
 
-1. **Identify any penalty applied that is not yet in the Penalties table.**
-   A penalty is "new" if it describes a mistake pattern that could recur in
-   other submissions (e.g. using the wrong API, skipping a required step,
-   misunderstanding a spec requirement).
+1. **Identify any deduction applied that has no matching penalty ID in the
+   Grading Procedure.** A pattern is "new" if it describes a mistake that
+   could recur in other submissions (e.g. using the wrong API, skipping a
+   required step, misunderstanding a spec requirement).
 
 2. **For each new pattern found:**
 
-   **If the grader identified the penalty independently:** register it and
-   proceed — no confirmation needed before the retroactive check.
+   **If the grader identified it independently:** raise it with the professor
+   immediately — do not register it unilaterally.
 
    **If the professor proposed the penalty:** verify it in the student's code
-   before registering it:
+   before accepting:
    - Confirm the issue is present with a code snippet or finding line.
    - If evidence is ambiguous, ask for clarification before applying.
    - If the issue is not found, report back with evidence and ask whether to
      apply it anyway.
-   - Do not add to the Penalties table or update any analysis until the
-     penalty is confirmed.
+   - Do not update any analysis until the penalty is confirmed.
 
-   Once the penalty is confirmed (by observation or by professor):
-   - Add a row to the Penalties table in MIND.md:
-     `| <short name> | <what the issue is> | <deduction> | <group-slug> |`
+   Once the penalty is confirmed (by observation or by professor), raise it
+   for procedure update:
+   > ⚠️ New penalty pattern found: `<description>` (proposed: −N pts)
+   > This should be added to the Grading Procedure. Please confirm the
+   > deduction amount and a short ID prefix (e.g. `IMPL`, `API`, `STRUCT`).
+   > I'll update the procedure and apply this retroactively.
+
+   Wait for professor confirmation, then:
+   - Add the new penalty row (with assigned ID) to the relevant criterion's
+     "Common deductions" table in `## Grading Procedure` in MIND.md.
    - Immediately check all previously graded groups for the same issue
      (read their grading-analysis.md and, if needed, their code diff).
    - For each previously graded group where the same issue is present:
@@ -409,12 +413,18 @@ After completing the code analysis and visual run, review the findings:
    - Report to the professor:
 
    ```
-   ⚠️  New penalty registered: <name> (−N pts)
+   ⚠️  New penalty added to procedure: <ID> — <description> (−N pts)
        Applied to current group: <group-slug>
        Retroactive check: <list affected previously-graded groups, or "none">
    ```
 
    Wait for the professor to confirm or adjust before proceeding.
+
+   **If the professor wants to retire or replace an existing penalty:**
+   - Remove the penalty row from the procedure.
+   - Add it to `## Penalty Archive` in MIND.md:
+     `| <ID> | <description> | <deduction> | disabled / replaced-by: <new-ID> | <new-ID or —> |`
+   - If replacing: add the new penalty row to the procedure with a fresh ID.
 
 ---
 

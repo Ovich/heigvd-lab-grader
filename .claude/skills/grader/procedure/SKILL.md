@@ -54,7 +54,20 @@ Read the following in priority order:
 
 ## Step 2 — Generate procedure
 
-Write one subsection per criterion using this template:
+Start the procedure with a **preamble block** that carries forward the
+key grading parameters from `## Grading Criteria` in MIND.md:
+
+```markdown
+**Grade formula:** <!-- e.g. round((Total / Max × 5) + 1 − penalties, 0.1) -->
+**Late penalty:** <!-- e.g. −0.5 per started late day, max −2 -->
+**Hidden test coverage:** <!-- enabled / disabled -->
+```
+
+Copy exact values from the criteria. If hidden test coverage is absent,
+write `disabled`. This preamble is the only place `grader/grade` needs
+to look — it must not read `## Grading Criteria` at all.
+
+Then write one subsection per criterion using this template:
 
 ```markdown
 ### <Criterion name> [max pts]
@@ -69,10 +82,10 @@ Write one subsection per criterion using this template:
 - <what a correct, complete implementation looks like>
 
 **Common deductions:**
-| Issue | Deduction |
-|-------|-----------|
-| <issue description> | −N pts |
-| <issue description> | −N pts |
+| Penalty ID | Description | Deduction |
+|------------|-------------|-----------|
+| IMPL-01 | <description> | −N pts |
+| IMPL-02 | <description> | −N pts |
 
 **Reference:** lab-spec.md § <section>   <!-- omit if not applicable -->
 ```
@@ -87,6 +100,11 @@ Guidelines per source type:
 - **Live** — list the exact interactions to perform (key press, mouse move,
   click target) and the expected visual or console result for each.
 
+**Penalty ID naming:** use a short prefix reflecting the criterion or mistake
+category, followed by a two-digit index (e.g. `IMPL-01`, `API-02`, `LATE-01`).
+IDs must be unique across the entire procedure. They are referenced in
+`## Penalty Archive` when a penalty is retired or replaced.
+
 Infer common deductions from:
 - The solution diff (what the correct implementation does that a naive one
   might skip or mishandle)
@@ -100,14 +118,38 @@ validate them.
 
 ---
 
-## Step 3 — Present and confirm
+## Step 3 — Save as DRAFT and get approval
 
-Show the generated procedure to the professor. Invite edits before writing.
+1. Write the procedure to `## Grading Procedure` in MIND.md. Place
+   `<!-- status: DRAFT -->` on the first line of the section, before any
+   criterion subsections.
+2. Inform the professor:
+   > The grading procedure has been saved to MIND.md as **DRAFT**.
+   > Please review it there (scroll to `## Grading Procedure`) and let me
+   > know if you'd like any changes.
+3. Wait for the professor's response:
+   - **No changes / approved:** proceed to Step 3a.
+   - **Changes requested:** brainstorm with the professor, update the
+     relevant subsection(s) in MIND.md (add, remove, or adjust penalty rows
+     or "What to look for" items), then ask again. Repeat until approved.
 
-Once confirmed:
-1. Write to `## Grading Procedure` in MIND.md.
-2. Report:
-   ```
-   ✅ Grading procedure written — <N> criteria covered.
-   Next: run grader/grade to begin grading groups.
-   ```
+When updating penalty entries based on professor feedback:
+- Retiring a penalty: remove it from the procedure and add it to
+  `## Penalty Archive` in MIND.md with status `disabled`.
+- Replacing a penalty: remove the old row from the procedure, add it to
+  the archive with status `replaced-by: <new-ID>`, and add the new row
+  with a fresh ID.
+
+### Step 3a — Mark as READY
+
+Replace `<!-- status: DRAFT -->` with `<!-- status: READY -->` in the
+`## Grading Procedure` section of MIND.md.
+
+If this skill was invoked by `grader/init` or `grader/criteria`, tick
+`Grading procedure approved` in the Phase 1 checklist in MIND.md.
+
+Report:
+```
+✅ Grading procedure approved — <N> criteria covered.
+Next: run grader/grade to begin grading groups.
+```

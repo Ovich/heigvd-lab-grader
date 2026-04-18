@@ -32,7 +32,7 @@ The grader works in three phases:
 - **MIND.md is the single source of truth.** All criteria, deadlines, penalties, scoring, grading procedure, and session notes live there. Skills read it on every invocation — never from memory.
 - **Skills are read-only.** A skill file is never modified during a session. Professor instructions and discoveries are written to MIND.md.
 - **Student-facing analyses never reference the solution.** `grading-analysis.md` is published to students — it shows only their own code with findings.
-- **Consistent penalties across all groups.** A running Penalties table in MIND.md ensures every group is evaluated against the same standard. When a new penalty pattern is discovered, all previously graded groups are retroactively checked.
+- **Consistent penalties across all groups.** Active penalties are defined in the Grading Procedure with short readable IDs (e.g. `IMPL-01`). Retired or replaced penalties move to a Penalty Archive in MIND.md for traceability. When a new penalty pattern is discovered, all previously graded groups are retroactively checked.
 - **Workspace isolation.** Skills never read or write outside the current working directory.
 
 ---
