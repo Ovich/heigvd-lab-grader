@@ -241,132 +241,49 @@ Recompute the final grade.
 
 ---
 
-## Step 4b — Check for new penalty patterns
-
-After completing the code analysis and visual run, review the findings:
-
-1. **Identify any deduction applied that has no matching penalty ID in the
-   Grading Procedure.** A pattern is "new" if it describes a mistake that
-   could recur in other submissions (e.g. using the wrong API, skipping a
-   required step, misunderstanding a spec requirement).
-
-2. **For each new pattern found:**
-
-   **If the grader identified it independently:** raise it with the professor
-   immediately — do not register it unilaterally.
-
-   **If the professor proposed the penalty:** verify it in the student's code
-   before accepting:
-   - Confirm the issue is present with a code snippet or finding line.
-   - If evidence is ambiguous, ask for clarification before applying.
-   - If the issue is not found, report back with evidence and ask whether to
-     apply it anyway.
-   - Do not update any analysis until the penalty is confirmed.
-
-   Once the penalty is confirmed (by observation or by professor), surface
-   it to the professor and invoke `grader/procedure` to handle the update:
-   > ⚠️ New penalty pattern found: `<description>` (proposed: −N pts)
-   > Invoking `grader/procedure` to add it to the procedure.
-
-   After `grader/procedure` completes and the new penalty has an assigned ID:
-   - Immediately check all previously graded groups for the same issue
-     (read their grading-analysis.md and, if needed, their code diff).
-   - For each previously graded group where the same issue is present:
-     - Update their `grading-analysis.md` — add a finding line and adjust
-       the Score Decisions table.
-     - Update their row in the MIND.md scoring table.
-   - Report to the professor:
-
-   ```
-   ⚠️  New penalty applied: <ID> — <description> (−N pts)
-       Applied to current group: <group-slug>
-       Retroactive check: <list affected previously-graded groups, or "none">
-   ```
-
-   Wait for the professor to confirm or adjust before proceeding.
-
-   **If the professor wants to retire or replace an existing penalty:**
-   invoke `grader/procedure` to update the procedure.
-
----
-
-## Step 4c — First-grading confirmation gate
-
-**Only applies when this is the first group being graded** (all other rows
-in the Scoring Table have an empty Analysis column).
-
-Before writing anything to the MIND.md scoring table, present the full
-grading-analysis.md to the professor:
-
-> This is the **first grading** for this lab. Please review the full
-> analysis below before I finalise the scores. Confirm when ready, or
-> tell me what to adjust.
-
-[show full grading-analysis.md content]
-
-Wait for explicit professor confirmation ("ok", "go ahead", or specific
-corrections).
-
-### Handling professor-proposed penalties
-
-If the professor proposes a penalty that was not in the grading analysis:
-
-1. **Verify first — do not accept blindly.** Go back to the student's code
-   and check whether the issue the professor described is actually present.
-2. If the issue is clearly confirmed in the code: accept the penalty, update
-   the analysis, and register it in the Penalties table (Step 4b).
-3. If the evidence is ambiguous or the penalty description is unclear: ask
-   for clarification before applying anything:
-   > I checked `<file>:<lines>` and I'm not certain this applies because
-   > `<what you observed>`. Could you clarify what specifically to look for?
-4. If the issue is **not present** in the student's code: say so, with the
-   relevant snippet as evidence, and ask the professor to confirm:
-   > I looked at `<file>:<lines>` and did not find this issue — here is what
-   > I see: `<snippet>`. Should I still apply the penalty?
-
-Never silently skip a professor-proposed penalty, and never apply one without
-verifying it exists in the student's code.
-
-For subsequent groups this gate is skipped automatically.
-
----
-
-## Step 5 — Finalise and update MIND.md
-
-Once grading-analysis.md is complete and scores are final:
+## Step 5 — Finalise and present
 
 1. Update the group's row in the MIND.md scoring table:
    - Fill all criterion columns with their scores.
    - Fill Total and Grade.
-   - Set the Analysis column to the relative path:
-     `submissions/<group-slug>/grading-analysis.md`
+   - Set the Analysis column to: `submissions/<group-slug>/grading-analysis.md`
 
 2. If the group was in the Re-grading Tracker, mark it `✅ re-graded`.
 
 3. Tick the Phase 2 counter: `All groups graded (N / Total)`.
    When all groups are done, fully tick `- [x] All groups graded`.
 
-4. Report a brief summary to the professor:
+4. Scan the grading-analysis.md findings for any deduction that has no
+   matching penalty ID in the Grading Procedure — this is a suspected new
+   pattern. Note it (one line) to surface in the prompt below; do not
+   register it unilaterally.
+
+5. Present the summary and next-action prompt:
 
 ```
 ✅ <group-slug> — graded
 
-  Tests:     N / Max (automated)   ← N/A if no automated criteria
-  Manual:    N / Max               ← N/A if no manual criteria
-  Live:      N / Max               ← N/A if no live criteria
+  Tests:     N / Max   ← N/A if no automated criteria
+  Manual:    N / Max   ← N/A if no manual criteria
+  Live:      N / Max   ← N/A if no live criteria
   Penalty:   −X.X (N days late) / 0
   Total:     N / Max
   Grade:     X.X
 
   Notable: <one-line summary of key findings>
+
+  ⚠️ Suspected new pattern: <description> (proposed: −N pts)   ← omit if none
+
+What next?
+  1. Change something in the analysis
+  2. Register new penalty pattern → grader/grade/opt-ins/penalty-patterns
+  3. Next group: <suggested-group-slug> (N remaining)
+     (or name a different group)
 ```
 
----
-
-## Step 6 — Done
-
-Tell the professor the result and what comes next:
-
-> ✅ <group-slug> graded. N groups remaining.
-> Run `grader/grade` again for the next group, or `grader/feedback` to
-> publish feedback once all groups are done.
+Handle the professor's choice:
+- **Option 1:** make the requested change, recompute if needed, update
+  MIND.md, then re-present this prompt.
+- **Option 2:** invoke `grader/grade/opt-ins/penalty-patterns`.
+- **Option 3:** confirm the group and loop back to Step 1 for the next group.
+  If all groups are done, say so and suggest running `grader/feedback`.
