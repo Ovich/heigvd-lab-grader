@@ -23,6 +23,13 @@ table belongs in MIND.md `## Grading Criteria`.
 grading procedure is a downstream product of criteria — generate or
 regenerate it whenever criteria change.
 
+**In free labs, criteria must be abstract.** When `**Nature:** free` is set
+in MIND.md, every criterion must apply to any kind of project — e.g.
+"Functionality", "Code quality", "Documentation". Never write
+implementation-specific criteria (function names, test counts, specific APIs).
+The grading procedure will interpret each abstract criterion per group during
+grading.
+
 ---
 
 ## Criterion source types

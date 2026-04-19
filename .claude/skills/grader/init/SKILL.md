@@ -121,10 +121,11 @@ Mark optional items clearly.
 |---|-------------|----------|
 | 1 | Lab name and number (e.g. "4 · Tetris II") | ✅ |
 | 2 | Course name (e.g. "TWEB26 · HEIG-VD") | ✅ |
-| 3 | Student submissions source (see options below) | ✅ |
-| 4 | Solution reference — git URL or local path, and which branch | optional ⭐ highly recommended — enables solution diff, which significantly improves grading accuracy |
-| 5 | Course material — already present, or provide URL | optional |
-| 6 | Existing grading criteria — file path or document | optional |
+| 3 | Lab nature — **guided** (all groups implement the same thing, one shared grading procedure) or **free** (each group has a different project, grading procedure generated per group) | ✅ |
+| 4 | Student submissions source (see options below) | ✅ |
+| 5 | Solution reference — git URL or local path, and which branch | optional ⭐ highly recommended — enables solution diff, which significantly improves grading accuracy |
+| 6 | Course material — already present, or provide URL | optional |
+| 7 | Existing grading criteria — file path or document | optional |
 
 **Submissions source options (examples — not exhaustive):**
 - A GitHub Classroom assignment URL
@@ -232,6 +233,7 @@ in a state that does not reflect actual progress.
 ```markdown
 # MIND — <lab-name>
 **Course:** <course>
+**Nature:** guided <!-- guided = all groups do the same work, one shared procedure | free = each group has a different project, procedure generated per group -->
 **Deadline:** <!-- filled in Step 4 -->
 **Classroom:** <link or n/a>
 **Lab spec:** lab-spec.md
@@ -264,6 +266,7 @@ in a state that does not reflect actual progress.
 
 ## Phase 1 · Init
 - [ ] Lab info gathered
+- [ ] Lab nature defined (guided / free)
 - [ ] Folder structure created
 - [ ] Submissions cloned (0 / ?)
 - [ ] Grading criteria defined

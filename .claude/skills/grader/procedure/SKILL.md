@@ -25,6 +25,12 @@ automated criteria, describe what the test suite covers and what to check
 manually if tests pass but code quality is poor. For manual criteria, be
 concrete about exactly what to inspect.
 
+**In free labs, the procedure must stay abstract.** When `**Nature:** free`
+is set in MIND.md, "What to look for" must describe intent and quality
+signals rather than specific files or functions — e.g. "Does the project
+deliver on what the group set out to build? Are core interactions reliable?"
+The grader applies this framework to each group's specific project.
+
 ---
 
 ## Step 0 — Prerequisites

@@ -274,6 +274,9 @@ Recompute the final grade.
 
   ⚠️ Suspected new pattern: <description> (proposed: −N pts)   ← omit if none
 
+  📋 Free lab — grading procedure is abstract. Please review the analysis
+     above and confirm the scores reflect this group's specific project.   ← omit if guided
+
 What next?
   1. Change something in the analysis
   2. Register new penalty pattern → grader/grade/opt-ins/penalty-patterns

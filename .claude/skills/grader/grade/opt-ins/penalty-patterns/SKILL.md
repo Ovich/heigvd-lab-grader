@@ -77,26 +77,61 @@ Update the current group's `grading-analysis.md`:
 
 ---
 
-## Step 4 — Retroactive check
+## Step 4 — Retroactive check (opt-in)
 
-Check every previously graded group for the same issue:
-- Read their `grading-analysis.md`.
-- If needed, read their code diff.
-
-For each group where the issue is present:
-- Add the finding line to their `grading-analysis.md`.
-- Adjust their Score Decisions table and recompute their grade.
-- Update their row in the MIND.md scoring table.
-
-Report the result:
+Before running any retroactive check, ask the professor:
 
 ```
-⚠️  New penalty registered: <ID> — <description> (−N pts)
-    Applied to: <current-group-slug>
-    Retroactive check:
-      ❌ <group-slug> — issue found, score updated (X.X → X.X)
-      ✅ <group-slug> — not affected
-      ...
+⚠️ <ID> registered. N groups have already been graded.
+
+Retroactive check recommended — ensures all groups are penalised
+consistently for the same mistake. Without it, earlier groups keep
+an advantage they shouldn't have.
 ```
 
-Wait for the professor to confirm before closing.
+**If `**Nature:** free` is set in MIND.md**, add:
+
+```
+This is a free lab — groups worked on different projects. This penalty
+may not apply to other groups. Should it be:
+  1. Group-scoped — don't check others (their projects are different)
+  2. Cross-group — run retroactive check (I'll go one by one)
+```
+
+**If `**Nature:** guided`**, ask:
+
+```
+This can take a few minutes depending on cohort size. Want to run it now?
+  1. Yes — I'll go group by group and confirm with you after each
+  2. No — skip for now (you can re-run grader/grade on specific groups later)
+```
+
+If the professor chooses to skip (option 1 in free, option 2 in guided),
+stop here.
+
+### Per-group retroactive flow
+
+Go through each previously graded group **one at a time**:
+
+1. Read their `grading-analysis.md` and, if needed, their code diff.
+2. Report findings to the professor:
+
+```
+Checking <group-slug>…
+  ❌ Issue found at <file>:<lines> — apply −N pts?
+  ✅ Not affected — moving on.
+```
+
+3. Wait for confirmation before updating anything.
+4. If confirmed: update their `grading-analysis.md`, adjust Score Decisions,
+   recompute grade, update their row in the MIND.md scoring table.
+5. Ask: **"Continue to next group?"** before proceeding.
+
+After all groups are checked, report a final summary:
+
+```
+⚠️  Retroactive check complete: <ID> — <description> (−N pts)
+    ❌ <group-slug> — score updated (X.X → X.X)
+    ✅ <group-slug> — not affected
+    ...
+```
