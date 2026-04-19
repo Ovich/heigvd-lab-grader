@@ -1,4 +1,4 @@
-# heigvd-lab-grader
+# claude-lab-grader
 
 A set of Claude Code skills for grading lab assignments. Designed for courses where students submit work via Git repositories — GitHub Classroom, GitLab, or any other platform. Language and framework agnostic.
 
@@ -80,13 +80,13 @@ When generating criteria, the following standard opt-ins are available:
 Clone the repo and copy (or symlink) the `.claude/` folder into your workspace:
 
 ```bash
-git clone https://github.com/Ovich/heigvd-lab-grader
+git clone https://github.com/Ovich/claude-lab-grader
 
 # Project-scoped (one course workspace)
-cp -r heigvd-lab-grader/.claude/ <workspace>/
+cp -r claude-lab-grader/.claude/ <workspace>/
 
 # User-scoped (available in all projects)
-cp -r heigvd-lab-grader/.claude/skills/grader ~/.claude/skills/
+cp -r claude-lab-grader/.claude/skills/grader ~/.claude/skills/
 ```
 
 Then invoke from Claude Code:
