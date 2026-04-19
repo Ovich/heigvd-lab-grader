@@ -33,12 +33,12 @@ The grader works in three phases:
 graph TD
     PROF([Professor])
 
-    PROF -->|grader/init| INIT
-    PROF -->|grader/criteria| CRIT
-    PROF -->|grader/procedure| PROC
-    PROF -->|grader/grade| GRADE
+    PROF --> INIT[grader/init]
+    PROF --> CRIT[grader/criteria]
+    PROF --> PROC[grader/procedure]
+    PROF --> GRADE[grader/grade]
 
-    INIT -->|existing criteria path| PROC
+    INIT -->|existing criteria| PROC
     INIT -->|generate from scratch| CRIT
     CRIT -->|after confirmation| PROC
     CRIT -->|re-run: any change| PROC
