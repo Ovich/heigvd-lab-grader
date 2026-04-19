@@ -150,7 +150,8 @@ Append findings to `_mem/criteria-work.md`.
 Standard opt-ins are reusable criteria blocks that apply across many labs.
 They are opt-in — always ask the professor before including any.
 
-Present the available opt-ins and ask which to include:
+Present the available opt-ins and ask which to include.
+Omit [A] entirely if `**Nature:** free` or if no starter test suite exists.
 
 ```
 Standard criteria opt-ins available:
@@ -183,10 +184,11 @@ Which opt-ins do you want to include, and with how many points each?
 ```
 
 Notes:
-- **Automated tests — visible [A]** are proposed only if a test suite is
-  present in the **starter code** (the template branch of the solution ref,
-  or the initial commit of any submission before student changes). Tests
-  added by students do not count. Do not propose if no starter tests exist.
+- **Automated tests — visible [A]** are proposed only if **both** conditions hold:
+  (1) `**Nature:** guided` — free labs have no shared starter, so [A] never applies;
+  (2) a test suite is present in the **starter code** (the template branch of the solution ref,
+  or the initial commit of any submission before student changes). Tests added by students
+  do not count. Do not propose if either condition is unmet.
   Count the starter tests to anchor the 1 pt/test proposal.
 - **Automated tests — hidden [B]** is independent of [A]. Tooling is
   detected and proposed per group during grading — not during init.
