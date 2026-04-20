@@ -121,7 +121,7 @@ Mark optional items clearly.
 |---|-------------|----------|
 | 1 | Lab name and number (e.g. "4 · Tetris II") | ✅ |
 | 2 | Course name (e.g. "TWEB26 · HEIG-VD") | ✅ |
-| 3 | Lab nature — **guided** (all groups implement the same thing, one shared grading procedure) or **free** (each group has a different project, grading procedure generated per group) | ✅ |
+| 3 | Lab nature — **guided** (all groups implement the same thing, one shared grading procedure) or **free** (each group has a different project, one shared abstract procedure applied per group) | ✅ |
 | 4 | Student submissions source (see options below) | ✅ |
 | 5 | Solution reference — git URL or local path, and which branch | optional ⭐ highly recommended — enables solution diff, which significantly improves grading accuracy |
 | 6 | Course material — already present, or provide URL | optional |

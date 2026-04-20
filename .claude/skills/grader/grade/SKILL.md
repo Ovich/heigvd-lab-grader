@@ -275,8 +275,8 @@ Recompute the final grade.
 
   ⚠️ Suspected new pattern: <description> (proposed: −N pts)   ← omit if none
 
-  📋 Free lab — grading procedure is abstract. Please review the analysis
-     above and confirm the scores reflect this group's specific project.   ← omit if guided
+  📋 Free lab — it is highly recommended to verify all claims manually.
+     Use the grading analysis as a guide.   ← omit if guided
 
 What next?
   1. Change something in the analysis

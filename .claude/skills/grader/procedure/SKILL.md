@@ -253,7 +253,20 @@ in MIND.md.
 1. Write the procedure to `## Grading Procedure` in MIND.md. Place
    `<!-- status: DRAFT -->` on the first line of the section, before any
    criterion subsections.
-2. Inform the professor:
+2. Inform the professor. If `**Nature:** free`, prepend this warning:
+   > ⚠️ **Free lab — professor manual review required**
+   > Because each group has a different project, grading relies on abstract
+   > AI appreciations (e.g. "the project delivers on its stated goals",
+   > "core interactions are reliable"). These are qualitative judgements, not
+   > objective measurements. **For each group, the recommended workflow is:**
+   > 1. Read the AI-generated analysis to understand what was found.
+   > 2. Use those appreciations as a guided checklist — run the project
+   >    yourself and verify the key claims firsthand.
+   > 3. Adjust scores based on your own observations before finalising.
+   >
+   > Do not treat AI-generated scores as final without your own verification.
+
+   Then:
    > The grading procedure has been saved to MIND.md as **DRAFT**.
    > Please review it there (scroll to `## Grading Procedure`) and let me
    > know if you'd like any changes.
