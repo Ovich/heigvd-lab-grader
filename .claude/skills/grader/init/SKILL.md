@@ -288,6 +288,7 @@ in a state that does not reflect actual progress.
 ## Scoring Table
 <!-- filled by Step 4 -->
 <!-- single source of truth — update scores here as groups are graded -->
+<!-- Rows MUST be in alphabetical order by group slug — matches submissions/ folder order -->
 <!-- Analysis column: relative path to submissions/<group-slug>/grading-analysis.md -->
 ```
 
@@ -353,6 +354,12 @@ git log --oneline --all -- | grep -v "github-classroom\[bot\]"
 
 Criteria columns are added in Step 5 once criteria are known. Leave the
 header with `[criteria TBD]` for now.
+
+**Rows must be in alphabetical order by group slug** — this matches the
+order of folders under `submissions/` and makes it easy to locate a group
+in both the table and the filesystem. When adding or inserting rows
+(new submissions, late arrivals), insert them in the correct alphabetical
+position rather than appending to the end.
 
 The `Analysis` column holds a relative path to the group's individual
 analysis file (e.g. `submissions/bekele/grading-analysis.md`), filled
